@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card transaction-card p-4 shadow-lg">
+        <div class="card-body text-center">
+            <h2 class="text-gradient mb-3">Make a Transaction</h2>
+
+            <form method="POST" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <label class="form-label"><i class="fas fa-money-bill-wave"></i> Amount</label>
+                    <input type="number" name="amount" class="form-control form-control-lg" placeholder="Enter Amount" required>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label"><i class="fas fa-exchange-alt"></i> Transaction Type</label>
+                    <select name="transaction_type" class="form-control form-control-lg">
+                        <option value="Deposit">Deposit</option>
+                        <option value="Withdraw">Withdraw</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-gradient w-100"><i class="fas fa-paper-plane"></i> Submit</button>
+            </form>
+
+            {% if error %}
+                <p class="text-danger mt-3">{{ error }}</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+/* Background Styling */
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+/* Transaction Card */
+.transaction-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Input Fields */
+.form-control {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    transition: all 0.3s;
+}
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+/* Buttons */
+.btn-gradient {
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    border: none;
+    color: white;
+    padding: 12px;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.btn-gradient:hover {
+    transform: scale(1.05);
+}
+
+/* Text Gradient */
+.text-gradient {
+    background: -webkit-linear-gradient(45deg, #f12711, #f5af19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+</style>
+{% endblock %}

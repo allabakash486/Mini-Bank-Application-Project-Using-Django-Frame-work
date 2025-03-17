@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4 border-0 dashboard-card" style="width: 100%; max-width: 700px;">
+        <div class="card-body text-center">
+            <h2 class="text-gradient mb-3">Welcome, {{ account.user.username }}</h2>
+
+            <div class="balance-box">
+                <h4>Current Balance</h4>
+                <p class="balance-amount">${{ account.balance }}</p>
+            </div>
+
+            <h3 class="mt-4">Recent Transactions</h3>
+            <input type="text" id="searchBox" class="form-control mt-2" placeholder="Search Transactions..." onkeyup="searchTransactions()">
+            
+            <ul id="transactionList" class="transaction-list mt-3">
+                {% for t in transactions %}
+                <li class="transaction-item">
+                    <span class="{{ t.transaction_type|lower }}">{{ t.transaction_type }}</span> - ${{ t.amount }}
+                    <small class="text-muted d-block">{{ t.timestamp }}</small>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'transaction' %}" class="btn btn-gradient"><i class="fas fa-plus"></i> Deposit</a>
+                <a href="{% url 'transaction' %}" class="btn btn-gradient"><i class="fas fa-minus"></i> Withdraw</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Search Function -->
+<script>
+function searchTransactions() {
+    let input = document.getElementById("searchBox").value.toLowerCase();
+    let items = document.getElementsByClassName("transaction-item");
+    for (let i = 0; i < items.length; i++) {
+        let text = items[i].innerText.toLowerCase();
+        items[i].style.display = text.includes(input) ? "" : "none";
+    }
+}
+</script>
+
+<!-- Custom Styles -->
+<style>
+/* Background Styling */
+body {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+/* Dashboard Card */
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Balance Box */
+.balance-box {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.balance-amount {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Transaction List */
+.transaction-list {
+    list-style: none;
+    padding: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+}
+.transaction-item {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+/* Transaction Type Styling */
+.deposit { color: #2ecc71; font-weight: bold; }
+.withdraw { color: #e74c3c; font-weight: bold; }
+
+/* Buttons */
+.btn-gradient {
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.btn-gradient:hover {
+    transform: scale(1.05);
+}
+
+/* Text Gradient */
+.text-gradient {
+    background: -webkit-linear-gradient(45deg, #f12711, #f5af19);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4 border-0" style="max-width: 600px; width: 100%; border-radius: 15px;">
+        <div class="card-body">
+            <h2 class="text-center text-gradient mb-4">Create an Account</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control shadow-sm" placeholder="Enter username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control shadow-sm" placeholder="Enter email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control shadow-sm" placeholder="First name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control shadow-sm" placeholder="Last name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Father Name</label>
+                            <input type="text" name="father_name" class="form-control shadow-sm" placeholder="Father name" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" name="phone" class="form-control shadow-sm" placeholder="Enter phone number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Aadhar Number</label>
+                            <input type="text" name="aadhar" class="form-control shadow-sm" placeholder="Aadhar number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">PAN Card</label>
+                            <input type="text" name="pan" class="form-control shadow-sm" placeholder="PAN number" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="form-label">Address</label>
+                    <textarea name="address" class="form-control shadow-sm" rows="2" placeholder="Full address" required></textarea>
+                </div>
+
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <label class="form-label">City</label>
+                        <input type="text" name="city" class="form-control shadow-sm" placeholder="City" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">State</label>
+                        <input type="text" name="state" class="form-control shadow-sm" placeholder="State" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <label class="form-label">Postal Code</label>
+                        <input type="text" name="postal_code" class="form-control shadow-sm" placeholder="Postal code" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Bank Balance</label>
+                        <input type="number" name="bank_balance" class="form-control shadow-sm" min="0" step="0.01" placeholder="Balance" required>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-2">
+                    <div class="col-md-6">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password1" class="form-control shadow-sm" placeholder="Enter password" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" name="password2" class="form-control shadow-sm" placeholder="Confirm password" required>
+                    </div>
+                </div>
+
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-gradient">Register</button>
+                </div>
+            </form>
+            <p class="text-center mt-3">Already have an account? <a href="{% url 'login' %}" class="text-primary">Login</a></p>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        font-family: 'Poppins', sans-serif;
+    }
+    .btn-gradient {
+        background: linear-gradient(to right, #ff512f, #dd2476);
+        border: none;
+        color: white;
+        padding: 12px;
+        border-radius: 50px;
+        width: 100%;
+        transition: all 0.3s;
+    }
+    .btn-gradient:hover {
+        transform: scale(1.05);
+    }
+    .card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .text-gradient {
+        background: -webkit-linear-gradient(45deg, #ff512f, #dd2476);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+</style>
+{% endblock %}

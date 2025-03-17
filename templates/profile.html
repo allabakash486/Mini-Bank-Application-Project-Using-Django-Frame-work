@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="profile-container">
+    <h2>{{ profile.user.username }}'s Profile</h2>
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
+    
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+    
+    <h3>Account Details</h3>
+    <p>Balance: ${{ account.balance }}</p>
+</div>
+{% endblock %}
