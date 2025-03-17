@@ -1,122 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Bank</title>
     
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Mini Bank</title>
-    
-        <!-- {% load static %}  Load static files -->
-        <style>
-            h1
+    <!-- Bootstrap & FontAwesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
+    <!-- Custom Styles -->
+    <style>
+        /* Background Styling */
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
 
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            width: 250px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding-top: 20px;
+            box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.5);
+        }
 
-/* General Styles */
-body {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    font-family: 'Poppins', sans-serif;
-}
+        .sidebar h1 {
+            color: #f5af19;
+            text-align: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
 
-/* Sidebar Navigation */
-.sidebar {
-    width: 220px;
-    height: 100vh;
-    position: fixed;
-    background: #1c1e21;
-    color: white;
-    padding: 20px;
-}
+        .sidebar ul {
+            padding: 0;
+            margin-top: 20px;
+            list-style: none;
+            text-align: center;
+        }
 
-.sidebar h2 {
-    text-align: center;
-    margin-bottom: 30px;
-}
+        .sidebar ul li {
+            padding: 15px;
+            transition: all 0.3s ease-in-out;
+        }
 
-.sidebar ul {
-    padding: 0;
-}
+        .sidebar ul li:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
 
-.sidebar ul li {
-    list-style: none;
-    padding: 10px;
-    transition: 0.3s;
-}
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-.sidebar ul li:hover {
-    background: #ff512f;
-}
+        /* Navbar Buttons */
+        .nav-btn {
+            width: 200px;
+            border: none;
+            padding: 10px;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+            font-size: 18px;
+            font-weight: bold;
+        }
 
-.sidebar ul li a {
-    color: white;
-    text-decoration: none;
-    display: block;
-}
+        .btn-dashboard {
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+        }
 
-/* Main Content */
-.main-content {
-    margin-left: 240px;
-    padding: 40px;
-}
+        .btn-transactions {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+        }
 
-/* Form Styling */
-.register-card {
-    width: 50%;
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 30px;
-}
+        .btn-logout {
+            background: linear-gradient(45deg, #f12711, #f5af19);
+        }
 
-/* .text-gradient {
-    background: -webkit-linear-gradient(45deg, #f12711, #f5af19);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-} */
+        .nav-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
 
-.btn-gradient {
-    background: linear-gradient(45deg, #ff512f, #dd2476);
-    border: none;
-    color: white;
-    padding: 12px;
-    border-radius: 50px;
-    width: 100%;
-    transition: all 0.3s;
-}
+        /* Main Content */
+        .main-content {
+            margin-left: 270px;
+            padding: 40px;
+        }
 
-.btn-gradient:hover {
-    transform: scale(1.05);
-}
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                text-align: center;
+            }
 
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
 
-h1{
-
-    font-size:300px ;
-}
-
-
-
-        </style>
-         <link rel="stylesheet" href="../static/css/styles.css"> 
-    
-        <!-- <title>Mini Bank</title> -->
-        <!-- <link rel="stylesheet" href="/static/css/styles.css"> -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-        
+            .nav-btn {
+                width: 90%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- <h1 style="text-align: center; " >Welcome To our Bank </h1> -->
+
     <!-- Sidebar Navigation -->
-    <nav class="navbar bg-dark">
-        <!--  -->
-        <h1><span class="badge text-bg-light">Mini Bank</span></h1>
-        
-            <li class="nav-link"><a href="{% url 'dashboard' %}" style="text-decoration: none;"><i class="fas fa-tachometer-alt" ></i> <button type="button" class="btn btn-warning">Dashboard</button></a></li>
-            <li class="nav-link" style="text-decoration: none;" style="text-decoration: none;"><a href="{% url 'transaction' %}"><i class="fas fa-exchange-alt"></i> <button type="button" class="btn btn-warning">Transactions</button></a></li>
-            <li class="nav-link" style="text-decoration: none;" style="text-decoration: none;"><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> <button type="button" class="btn btn-warning">logout</button></a></li>
-        
+    <nav class="sidebar">
+        <h1>Mini Bank</h1>
+        <ul>
+            <li>
+                <a href="{% url 'dashboard' %}">
+                    <button class="nav-btn btn-dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'transaction' %}">
+                    <button class="nav-btn btn-transactions"><i class="fas fa-exchange-alt"></i> Transactions</button>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">
+                    <button class="nav-btn btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </a>
+            </li>
+        </ul>
     </nav>
-    
 
     <!-- Main Content -->
     <div class="main-content">
@@ -125,4 +146,3 @@ h1{
 
 </body>
 </html>
-
